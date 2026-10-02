@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>给财财的一份神秘礼物</title>
+
+
+<style>
+
+/* =========================================================
+   基础
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #fff8fa 48%,
+            #f8f4f6 100%
+        );
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+}
+
+
+/* =========================================================
+   顶部栏
+========================================================= */
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 62px;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,.95);
+
+    backdrop-filter: blur(10px);
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    color: #222;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+.back {
+
+    position: absolute;
+
+    left: 18px;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    font-weight: 300;
+}
+
+.menu {
+
+    position: absolute;
+
+    right: 18px;
+
+    font-size: 23px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   左上角 To 财财
+========================================================= */
+
+.to-name {
+
+    position: fixed;
+
+    z-index: 10000;
+
+    top: 77px;
+
+    left: 18px;
+
+    color: #555;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 1px 3px
+        rgba(0,0,0,.08);
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    animation:
+        toNameIn
+        1.2s
+        ease
+        .5s
+        forwards;
+}
+
+
+@keyframes toNameIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   主舞台
+========================================================= */
+
+.scene {
+
+    position: absolute;
+
+    top: 62px;
+
+    left: 0;
+    right: 0;
+
+    bottom: 70px;
+
+    overflow: hidden;
+
+    perspective: 900px;
+}
+
+
+/* =========================================================
+   祝福文字
+========================================================= */
+
+.message {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    padding:
+        7px 11px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    white-space: nowrap;
+
+    color: #333;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.07);
+
+    opacity: 0;
+
+    /*
+       最初从远处出现
+    */
+
+    transform:
+        translate(
+            var(--startX),
+            var(--startY)
+        )
+        scale(.15)
+        rotate(var(--startRotate));
+
+    transition:
+        transform
+        var(--enterDuration)
+        cubic-bezier(.16,1,.3,1),
+
+        opacity
+        1s
+        ease;
+
+    will-change:
+        transform,
+        opacity;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   第一阶段：平铺屏幕
+========================================================= */
+
+.message.visible {
+
+    opacity: 1;
+
+    transform:
+        translate(
+            var(--flatX),
+            var(--flatY)
+        )
+        scale(1)
+        rotate(var(--flatRotate));
+}
+
+
+/* =========================================================
+   第二阶段：汇聚成爱心
+========================================================= */
+
+.message.toHeart {
+
+    opacity: 1;
+
+    transform:
+        translate(
+            var(--heartX),
+            var(--heartY)
+        )
+        scale(1)
+        rotate(var(--heartRotate));
+
+    transition:
+        transform
+        3.2s
+        cubic-bezier(.22,1,.36,1);
+}
+
+
+/* =========================================================
+   爱心形成之后
+========================================================= */
+
+.message.heartFloat {
+
+    animation:
+        heartFloat
+        3s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes heartFloat {
+
+    0% {
+
+        margin-top: -3px;
+
+    }
+
+    100% {
+
+        margin-top: 3px;
+
+    }
+
+}
+
+
+/* =========================================================
+   底部
+========================================================= */
+
+.bottom {
+
+    position: fixed;
+
+    z-index: 9999;
+
+    left: 0;
+    right: 0;
+
+    bottom: 0;
+
+    height: 70px;
+
+    background:
+        rgba(0,0,0,.93);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding-right: 15px;
+}
+
+.play {
+
+    width: 58px;
+    height: 44px;
+
+    border-radius: 9px;
+
+    background: #222;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,.25);
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+.speed {
+
+    color: white;
+
+    font-size: 13px;
+
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   小爱心粒子
+========================================================= */
+
+.particle {
+
+    position: absolute;
+
+    z-index: 3000;
+
+    pointer-events: none;
+
+    color: #ff91aa;
+
+    font-size:
+        var(--size);
+
+    opacity: 0;
+
+    animation:
+        particleMove
+        3s
+        ease-out
+        forwards;
+}
+
+
+@keyframes particleMove {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate(0,0)
+            scale(.2)
+            rotate(0deg);
+
+    }
+
+    25% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--moveX),
+                var(--moveY)
+            )
+            scale(1.3)
+            rotate(30deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   闪光粒子
+========================================================= */
+
+.sparkle {
+
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 8px
+        #ff9db3;
+
+    opacity: 0;
+
+    animation:
+        sparkleAnimation
+        1.5s
+        ease-out
+        forwards;
+}
+
+
+@keyframes sparkleAnimation {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(.2);
+
+    }
+
+    40% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.5);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   手机小屏适配
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .message {
+
+        font-size: 12px;
+
+        padding:
+            6px 9px;
+
+    }
+
+    .to-name {
+
+        font-size: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   大屏适配
+========================================================= */
+
+@media (min-width: 700px) {
+
+    .message {
+
+        font-size: 15px;
+
+    }
+
+    .to-name {
+
+        font-size: 18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     顶部
+========================================================= -->
+
+<div class="header">
+
+    <div class="back">
+        ‹
+    </div>
+
+    给财财的一份神秘礼物
+
+    <div class="menu">
+        •••
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     左上角称呼
+========================================================= -->
+
+<div class="to-name">
+
+    To 财财：
+
+</div>
+
+
+<!-- =========================================================
+     主舞台
+========================================================= -->
+
+<div
+    class="scene"
+    id="scene">
+</div>
+
+
+<!-- =========================================================
+     底部
+========================================================= -->
+
+<div class="bottom">
+
+    <div
+        class="play"
+        id="play">
+
+        ▶
+
+    </div>
+
+    <div class="speed">
+
+        1x
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   祝福语
+
+   共 120 条左右
+   同一轮动画绝不会重复
+========================================================= */
+
+const messages = [
+
+    "财财，要每天开心呀～",
+    "愿你每天都有小确幸",
+    "愿所有美好如期而至",
+    "今天也要开心",
+    "愿你眼里有光",
+    "愿你心中有暖",
+    "希望你永远被温柔对待",
+    "愿你的生活充满惊喜",
+    "开心最重要",
+    "慢慢来，一切都会好的",
+
+    "累了就好好休息",
+    "记得好好吃饭",
+    "多喝水哦～",
+    "早点休息",
+    "每天都要有好心情",
+    "愿你所愿皆所得",
+    "好运正在路上",
+    "万事顺意",
+    "愿你每天都有期待",
+    "做一个快乐的人",
+
+    "生活会越来越好的",
+    "你已经很棒啦",
+    "别给自己太大压力",
+    "今天也值得被爱",
+    "愿你平安喜乐",
+    "愿你事事顺心",
+    "愿你一直保持可爱",
+    "愿你每天笑容满满",
+    "希望所有等待都有结果",
+    "愿所有努力都不被辜负",
+
+    "未来一定会越来越好",
+    "愿你拥有很多很多快乐",
+    "愿你的每一天都闪闪发光",
+    "愿你遇见更多美好",
+    "愿你被世界温柔以待",
+    "愿你心想事成",
+    "愿你一直快乐",
+    "加油，你一定可以的！",
+    "我站在你这边",
+    "别难过啦，抱抱你",
+
+    "新的一天也要元气满满",
+    "愿你每天都拥有好心情",
+    "希望你永远开心",
+    "愿你一路都有鲜花和掌声",
+    "所有美好的事情都会发生",
+    "你值得所有美好",
+    "愿你的生活甜甜的",
+    "愿你的未来亮晶晶",
+    "愿你每天都有小惊喜",
+    "愿你被爱包围",
+
+    "愿快乐一直陪着你",
+    "愿你的每一天都值得期待",
+    "愿你笑容常在",
+    "愿你所遇皆是美好",
+    "愿你生活明朗，万事顺遂",
+    "愿你每天都能遇到好事",
+    "愿你被温柔环绕",
+    "愿你永远拥有好心情",
+    "愿你的世界永远有光",
+    "愿你拥有温柔的每一天",
+
+    "愿你每天醒来都有好心情",
+    "愿今天的阳光刚刚好",
+    "愿你遇见温柔的人和事",
+    "希望你一直做自己喜欢的事",
+    "愿你的生活有惊喜也有浪漫",
+    "愿所有期待都有回应",
+    "愿所有奔赴都有意义",
+    "愿你的努力最终开花结果",
+    "希望你永远保持对生活的热爱",
+    "愿你走过的每一步都算数",
+
+    "愿你眼里的星星一直闪耀",
+    "愿你心里的小太阳永远明亮",
+    "希望你每天都有值得开心的事情",
+    "愿你的笑容比阳光还要灿烂",
+    "愿你拥有柔软而坚定的内心",
+    "愿你一直被好运悄悄照顾",
+    "愿快乐成为你的日常",
+    "愿烦恼永远追不上你",
+    "愿你的生活一直甜甜的",
+    "愿你拥有属于自己的浪漫",
+
+    "愿你所走的路都繁花盛开",
+    "愿你想见的人都能见到",
+    "愿你想做的事都能做到",
+    "愿你想去的地方终有一天抵达",
+    "愿你的愿望慢慢实现",
+    "愿未来的每一天都值得期待",
+    "愿你遇到的人都带着善意",
+    "愿你收获很多很多温暖",
+    "愿你被偏爱也被珍惜",
+    "愿你永远有人牵挂",
+
+    "愿你忙时有收获",
+    "愿你闲时有快乐",
+    "愿你累时有人陪",
+    "愿你难过时有人懂",
+    "愿你开心时有人分享",
+    "愿你每一次努力都有回响",
+    "愿你每一个决定都不留遗憾",
+    "愿你拥有自由自在的生活",
+    "愿你永远有重新开始的勇气",
+    "愿你始终相信美好的事情会发生",
+
+    "希望你每天都能睡个好觉",
+    "记得按时吃饭呀",
+    "天气冷了记得添衣",
+    "天气热了记得多喝水",
+    "再忙也别忘了照顾自己",
+    "累了就停下来歇一歇",
+    "不要把所有事情都放在心上",
+    "偶尔偷个懒也没有关系",
+    "给自己留一点放空的时间",
+    "生活不急，我们慢慢来",
+
+    "愿你拥有好多好吃的",
+    "愿你每顿饭都吃得开心",
+    "愿你喜欢的东西都恰好拥有",
+    "愿你每天都能吃到喜欢的食物",
+    "愿你的奶茶永远是甜甜的",
+    "愿你的火锅永远热气腾腾",
+    "愿你的周末总有好玩的事情",
+    "愿你的假期永远充满期待",
+    "愿每一次出门都遇见好天气",
+    "愿每一次回家都有人等你",
+
+    "希望你今天比昨天更快乐",
+    "希望你明天比今天更幸运",
+    "希望你的烦恼越来越少",
+    "希望你的快乐越来越多",
+    "希望你的钱包越来越鼓",
+    "希望你的生活越来越顺",
+    "希望你的心情一直晴朗",
+    "希望你的每一天都充满活力",
+    "希望你的世界一直温柔",
+    "希望你一直拥有小小的幸福",
+
+    "愿好运偷偷来到你身边",
+    "愿惊喜不经意间降临",
+    "愿幸福悄悄陪伴着你",
+    "愿快乐一直围绕着你",
+    "愿温柔永远与你相遇",
+    "愿浪漫永远不会迟到",
+    "愿幸运一直眷顾你",
+    "愿美好的事情接二连三",
+    "愿生活给你很多甜头",
+    "愿所有好事都发生在你身上",
+
+    "财财，今天也要元气满满",
+    "财财，要一直开心呀",
+    "财财，记得照顾好自己",
+    "财财，希望你每天都有笑容",
+    "财财，愿你被世界温柔对待",
+    "财财，愿你的愿望都实现",
+    "财财，愿你永远平安顺遂",
+    "财财，愿你每天都遇见快乐",
+    "财财，愿你一直拥有好心情",
+    "财财，你值得所有美好",
+
+    "愿你的每一次选择都靠近幸福",
+    "愿你的每一份付出都有回报",
+    "愿你的每个清晨都充满希望",
+    "愿你的每个夜晚都安心自在",
+    "愿你永远拥有说走就走的勇气",
+    "愿你永远保留一颗童心",
+    "愿你始终拥有热爱生活的能力",
+    "愿你在人群中依然闪闪发光",
+    "愿你永远不缺重新出发的勇气",
+    "愿你成为自己最喜欢的模样",
+
+    "愿你的生活有花有树有阳光",
+    "愿你的身边一直有真诚的人",
+    "愿你拥有很多值得回忆的瞬间",
+    "愿你未来的故事都是好故事",
+    "愿你每一次等待都有答案",
+    "愿你所有的遗憾都被温柔填满",
+    "愿你经历的风雨最终化成彩虹",
+    "愿你走过低谷后迎来满眼星光",
+    "愿你所有的美好都不期而遇",
+    "愿你的未来明亮又灿烂"
+
+];
+
+
+/* =========================================================
+   卡片颜色
+========================================================= */
+
+const colors = [
+
+    "#FFE4A8",
+    "#FFD0DA",
+    "#FFC5B8",
+    "#FFE8A6",
+    "#F8C9D8",
+    "#DDEBFF",
+    "#FFD9B0",
+    "#E8D1FF",
+    "#D8F1DF",
+    "#FFE0C7",
+    "#FFD6E0",
+    "#E5D4FF"
+
+];
+
+
+/* =========================================================
+   页面元素
+========================================================= */
+
+const scene =
+    document.getElementById("scene");
+
+const play =
+    document.getElementById("play");
+
+
+/* =========================================================
+   不重复随机系统
+========================================================= */
+
+let shuffledMessages = [];
+
+let messageIndex = 0;
+
+
+/* Fisher-Yates 洗牌 */
+
+function shuffleMessages() {
+
+    shuffledMessages =
+        [...messages];
+
+    for (
+        let i =
+            shuffledMessages.length - 1;
+
+        i > 0;
+
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            shuffledMessages[i],
+            shuffledMessages[j]
+
+        ] =
+        [
+            shuffledMessages[j],
+            shuffledMessages[i]
+        ];
+
+    }
+
+
+    messageIndex = 0;
+
+}
+
+
+/* 第一次洗牌 */
+
+shuffleMessages();
+
+
+/* =========================================================
+   随机数
+========================================================= */
+
+function random(min, max) {
+
+    return Math.random()
+        * (max - min)
+        + min;
+
+}
+
+
+/* =========================================================
+   获取下一条不重复祝福
+========================================================= */
+
+function getNextMessage() {
+
+    if (
+        messageIndex >=
+        shuffledMessages.length
+    ) {
+
+        shuffleMessages();
+
+    }
+
+
+    const text =
+        shuffledMessages[
+            messageIndex
+        ];
+
+
+    messageIndex++;
+
+
+    return text;
+
+}
+
+
+/* =========================================================
+   爱心数学公式
+========================================================= */
+
+function heartPosition(t) {
+
+    const x =
+        16 *
+        Math.pow(
+            Math.sin(t),
+            3
+        );
+
+
+    const y =
+        13 *
+        Math.cos(t)
+
+        - 5 *
+        Math.cos(2 * t)
+
+        - 2 *
+        Math.cos(3 * t)
+
+        - Math.cos(4 * t);
+
+
+    return {
+        x,
+        y
+    };
+
+}
+
+
+/* =========================================================
+   创建一条祝福文字
+========================================================= */
+
+function createMessage(
+    index,
+    total
+) {
+
+
+    const el =
+        document.createElement("div");
+
+
+    el.className =
+        "message";
+
+
+    /* -----------------------------------------------
+       获取不重复祝福
+    ----------------------------------------------- */
+
+    el.innerText =
+        getNextMessage();
+
+
+    /* -----------------------------------------------
+       随机背景颜色
+    ----------------------------------------------- */
+
+    el.style.background =
+        colors[
+            Math.floor(
+                Math.random()
+                * colors.length
+            )
+        ];
+
+
+    /* -----------------------------------------------
+       平铺位置
+    ----------------------------------------------- */
+
+    const cardWidth =
+        Math.min(
+            180,
+            scene.clientWidth * .42
+        );
+
+
+    const cardHeight = 30;
+
+
+    const flatX =
+        random(
+            5,
+            Math.max(
+                5,
+                scene.clientWidth
+                - cardWidth
+            )
+        );
+
+
+    const flatY =
+        random(
+            45,
+            Math.max(
+                45,
+                scene.clientHeight
+                - cardHeight
+            )
+        );
+
+
+    /* -----------------------------------------------
+       初始出场位置
+    ----------------------------------------------- */
+
+    const startX =
+        flatX +
+        random(-160,160);
+
+
+    const startY =
+        flatY +
+        random(-180,180);
+
+
+    /* -----------------------------------------------
+       爱心坐标
+    ----------------------------------------------- */
+
+    const t =
+        Math.PI * 2
+        * index
+        / total;
+
+
+    const heart =
+        heartPosition(t);
+
+
+    /* -----------------------------------------------
+       根据屏幕自动缩放
+    ----------------------------------------------- */
+
+    const scale =
+        Math.min(
+            window.innerWidth,
+            scene.clientHeight
+        ) / 36;
+
+
+    const heartX =
+        heart.x * scale;
+
+
+    const heartY =
+        -heart.y * scale;
+
+
+    /* -----------------------------------------------
+       最终位置
+    ----------------------------------------------- */
+
+    const finalX =
+        scene.clientWidth / 2
+        + heartX
+        - cardWidth / 2;
+
+
+    const finalY =
+        scene.clientHeight / 2
+        + heartY
+        - cardHeight / 2;
+
+
+    /* -----------------------------------------------
+       CSS变量
+    ----------------------------------------------- */
+
+    el.style.setProperty(
+        "--startX",
+        startX + "px"
+    );
+
+
+    el.style.setProperty(
+        "--startY",
+        startY + "px"
+    );
+
+
+    el.style.setProperty(
+        "--flatX",
+        flatX + "px"
+    );
+
+
+    el.style.setProperty(
+        "--flatY",
+        flatY + "px"
+    );
+
+
+    el.style.setProperty(
+        "--heartX",
+        finalX + "px"
+    );
+
+
+    el.style.setProperty(
+        "--heartY",
+        finalY + "px"
+    );
+
+
+    el.style.setProperty(
+        "--startRotate",
+        random(-50,50) + "deg"
+    );
+
+
+    el.style.setProperty(
+        "--flatRotate",
+        random(-8,8) + "deg"
+    );
+
+
+    el.style.setProperty(
+        "--heartRotate",
+        random(-5,5) + "deg"
+    );
+
+
+    el.style.setProperty(
+        "--enterDuration",
+        random(1.2,2.1) + "s"
+    );
+
+
+    /* -----------------------------------------------
+       加入页面
+    ----------------------------------------------- */
+
+    scene.appendChild(el);
+
+
+    /* -----------------------------------------------
+       依次出现
+    ----------------------------------------------- */
+
+    const appearDelay =
+        index * 55;
+
+
+    setTimeout(() => {
+
+        el.classList.add(
+            "visible"
+        );
+
+    }, appearDelay);
+
+
+    /* -----------------------------------------------
+       5秒后开始汇聚
+    ----------------------------------------------- */
+
+    setTimeout(() => {
+
+        el.classList.remove(
+            "visible"
+        );
+
+
+        el.classList.add(
+            "toHeart"
+        );
+
+    }, 5000);
+
+
+    /* -----------------------------------------------
+       爱心形成后轻微漂浮
+    ----------------------------------------------- */
+
+    setTimeout(() => {
+
+        el.classList.add(
+            "heartFloat"
+        );
+
+    }, 8200);
+
+}
+
+
+/* =========================================================
+   创建漂浮小爱心
+========================================================= */
+
+function createHeartParticle() {
+
+
+    const p =
+        document.createElement("div");
+
+
+    p.className =
+        "particle";
+
+
+    p.innerText =
+        Math.random() > .3
+            ? "♥"
+            : "♡";
+
+
+    p.style.left =
+        random(20,80) + "%";
+
+
+    p.style.top =
+        random(25,75) + "%";
+
+
+    p.style.setProperty(
+        "--size",
+        random(10,21) + "px"
+    );
+
+
+    p.style.setProperty(
+        "--moveX",
+        random(-120,120) + "px"
+    );
+
+
+    p.style.setProperty(
+        "--moveY",
+        random(-140,30) + "px"
+    );
+
+
+    scene.appendChild(p);
+
+
+    setTimeout(() => {
+
+        p.remove();
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   创建闪光
+========================================================= */
+
+function createSparkle() {
+
+
+    const s =
+        document.createElement("div");
+
+
+    s.className =
+        "sparkle";
+
+
+    s.style.left =
+        random(15,85) + "%";
+
+
+    s.style.top =
+        random(15,85) + "%";
+
+
+    scene.appendChild(s);
+
+
+    setTimeout(() => {
+
+        s.remove();
+
+    }, 1600);
+
+}
+
+
+/* =========================================================
+   播放动画
+========================================================= */
+
+function playHeart() {
+
+
+    /* -----------------------------------------------
+       清理上一轮
+    ----------------------------------------------- */
+
+    scene
+        .querySelectorAll(
+            ".message, .particle, .sparkle"
+        )
+        .forEach(
+            el => el.remove()
+        );
+
+
+    /* -----------------------------------------------
+       重新打乱祝福语
+    ----------------------------------------------- */
+
+    shuffleMessages();
+
+
+    /* -----------------------------------------------
+       祝福数量
+
+       100条全部不同
+    ----------------------------------------------- */
+
+    const total = 100;
+
+
+    /* -----------------------------------------------
+       创建100条祝福
+    ----------------------------------------------- */
+
+    for (
+        let i = 0;
+        i < total;
+        i++
+    ) {
+
+        createMessage(
+            i,
+            total
+        );
+
+    }
+
+
+    /* -----------------------------------------------
+       5秒后开始出现小爱心
+    ----------------------------------------------- */
+
+    for (
+        let i = 0;
+        i < 45;
+        i++
+    ) {
+
+        setTimeout(
+            createHeartParticle,
+            5000 + i * 75
+        );
+
+    }
+
+
+    /* -----------------------------------------------
+       汇聚过程中闪光
+    ----------------------------------------------- */
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        setTimeout(
+            createSparkle,
+            5600 + i * 100
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   页面打开自动播放
+========================================================= */
+
+setTimeout(() => {
+
+    playHeart();
+
+}, 600);
+
+
+/* =========================================================
+   点击底部按钮重新播放
+========================================================= */
+
+play.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        playHeart();
+
+    }
+);
+
+
+/* =========================================================
+   点击屏幕重新播放
+========================================================= */
+
+scene.addEventListener(
+    "click",
+    function() {
+
+        playHeart();
+
+    }
+);
+
+
+/* =========================================================
+   手机横竖屏
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        playHeart();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
